@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clube da Caçamba – UEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #1E6B3C;
+  --verde-escuro: #0D4025;
+  --verde-claro: #4CAF70;
+  --verde-neon: #7ED957;
+  --azul: #1A5276;
+  --terra: #F5ECD7;
+  --creme: #FFFDF5;
+  --amarelo: #F4C842;
+  --laranja: #E8843A;
+  --escuro: #0F1E12;
+  --cinza: #5A6B5C;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--creme);
+  color: var(--escuro);
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  background: rgba(13,64,37,0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  border-bottom: 2px solid var(--verde-neon);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  height: 44px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(126,217,87,0.5));
+}
+
+.nav-logo span {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  color: var(--terra);
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+
+.nav-logo small {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--verde-neon);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+nav a {
+  color: var(--terra);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--verde-neon); }
+
+.nav-insta {
+  background: var(--verde-neon);
+  color: var(--escuro) !important;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-insta:hover { background: var(--amarelo) !important; transform: scale(1.05); }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  background: var(--verde-escuro);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(76,175,112,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(26,82,118,0.2) 0%, transparent 70%);
+  display: flex;
+  align-items: center;
+  padding: 6rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Leafy SVG background */
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 80px;
+  background: var(--creme);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.hero-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-text { }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(126,217,87,0.15);
+  border: 1px solid var(--verde-neon);
+  color: var(--verde-neon);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-badge::before {
+  content: '●';
+  font-size: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--terra);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--verde-neon);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(245,236,215,0.75);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--verde-neon);
+  color: var(--escuro);
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--amarelo); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+.btn-outline {
+  border: 2px solid rgba(245,236,215,0.4);
+  color: var(--terra);
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-outline:hover { border-color: var(--terra); background: rgba(245,236,215,0.1); }
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.mascot-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+.mascot-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(126,217,87,0.25) 0%, transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.mascot-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--verde-neon);
+  line-height: 1;
+}
+
+.hero-stat span {
+  font-size: 0.72rem;
+  color: rgba(245,236,215,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Space Mono', monospace;
+}
+
+/* ─── SECTIONS GENERIC ─── */
+section { padding: 5rem 2rem; }
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--verde);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 2rem;
+  height: 2px;
+  background: var(--verde-neon);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: var(--verde-escuro);
+}
+
+/* ─── SOBRE ─── */
+#sobre {
+  background: var(--creme);
+  position: relative;
+}
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.sobre-texto p {
+  color: var(--cinza);
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.sobre-texto p strong { color: var(--verde-escuro); }
+
+.coord-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(30,107,60,0.1);
+  margin-top: 1.5rem;
+}
+
+.coord-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.coord-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--verde), var(--azul));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.coord-info h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--verde-escuro);
+}
+
+.coord-info p {
+  font-size: 0.82rem;
+  color: var(--cinza);
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.ods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.ods-card {
+  background: var(--verde-escuro);
+  color: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ods-card::before {
+  content: attr(data-num);
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.ods-card h5 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--verde-neon);
+  margin-bottom: 0.3rem;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.ods-card p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1.5;
+  margin: 0 !important;
+}
+
+/* ─── DESTAQUES (ENTREVISTAS) ─── */
+#destaques {
+  background: var(--verde-escuro);
+  position: relative;
+}
+
+#destaques .section-label { color: var(--verde-neon); }
+#destaques .section-label::before { background: var(--amarelo); }
+#destaques h2 { color: var(--terra); }
+
+.destaques-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.destaque-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(126,217,87,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.destaque-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--verde-neon);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.destaque-thumb {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.destaque-thumb.green { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
+.destaque-thumb.blue { background: linear-gradient(135deg, #0D47A1, #1565C0); }
+.destaque-thumb.teal { background: linear-gradient(135deg, #004D40, #00695C); }
+
+.play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+}
+
+.play-btn svg { fill: white; margin-left: 4px; }
+.destaque-card:hover .play-btn { background: var(--verde-neon); border-color: var(--verde-neon); }
+.destaque-card:hover .play-btn svg { fill: var(--escuro); }
+
+.destaque-emoji {
+  font-size: 5rem;
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+  opacity: 0.3;
+}
+
+.destaque-body { padding: 1.5rem; }
+
+.destaque-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-neon);
+  margin-bottom: 0.5rem;
+}
+
+.destaque-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--terra);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.destaque-body p {
+  font-size: 0.82rem;
+  color: rgba(245,236,215,0.6);
+  line-height: 1.5;
+}
+
+/* ─── PUBLICAÇÕES ─── */
+#publicacoes {
+  background: white;
+}
+
+.pub-list {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pub-item {
+  border: 1px solid #E8F5E9;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+}
+
+.pub-item:hover {
+  border-color: var(--verde-claro);
+  box-shadow: 0 4px 20px rgba(30,107,60,0.08);
+}
+
+.pub-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--verde);
+  font-weight: 700;
+  width: 48px;
+  padding-top: 0.2rem;
+}
+
+.pub-title {
+  font-weight: 700;
+  color: var(--verde-escuro);
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.pub-authors {
+  font-size: 0.82rem;
+  color: var(--cinza);
+  margin-bottom: 0.3rem;
+}
+
+.pub-venue {
+  font-size: 0.8rem;
+  color: var(--verde);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.pub-badge {
+  background: var(--verde-neon);
+  color: var(--escuro);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+  height: fit-content;
+}
+
+.pub-badge.award {
+  background: var(--amarelo);
+}
+
+/* ─── CONQUISTAS ─── */
+#conquistas {
+  background: linear-gradient(135deg, var(--verde-escuro) 0%, #1A3A52 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+#conquistas::before {
+  content: '🏆';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20rem;
+  opacity: 0.04;
+}
+
+#conquistas .section-label { color: var(--amarelo); }
+#conquistas .section-label::before { background: var(--amarelo); }
+#conquistas h2 { color: var(--terra); }
+
+.conquistas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.conquista-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(244,200,66,0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.conquista-card:hover {
+  border-color: var(--amarelo);
+  transform: translateY(-4px);
+}
+
+.conquista-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+.conquista-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--terra);
+  margin-bottom: 0.5rem;
+}
+
+.conquista-card p {
+  font-size: 0.85rem;
+  color: rgba(245,236,215,0.65);
+  line-height: 1.6;
+}
+
+.conquista-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--amarelo);
+  letter-spacing: 0.15em;
+  margin-top: 0.75rem;
+  display: block;
+}
+
+/* ─── EQUIPE ─── */
+#equipe {
+  background: var(--creme);
+}
+
+.equipe-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.membro-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.membro-card:hover {
+  border-color: var(--verde-claro);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(30,107,60,0.1);
+}
+
+.membro-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'Playfair Display', serif;
+  color: white;
+}
+
+.membro-card h4 {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--verde-escuro);
+  margin-bottom: 0.25rem;
+}
+
+.membro-card span {
+  font-size: 0.75rem;
+  color: var(--cinza);
+  display: block;
+  line-height: 1.4;
+}
+
+.membro-card .membro-role {
+  font-size: 0.72rem;
+  color: var(--verde);
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.3rem;
+  font-weight: 700;
+}
+
+/* ─── INSTAGRAM ─── */
+#instagram {
+  background: var(--verde-escuro);
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+#instagram .section-label { justify-content: center; }
+#instagram .section-label::before { display: none; }
+#instagram h2 { color: var(--terra); }
+
+.insta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-top: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.insta-link:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+.insta-preview {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+}
+
+.insta-tile {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.insta-tile-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  transition: transform 0.3s;
+}
+
+.insta-tile:hover .insta-tile-inner { transform: scale(1.1); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--escuro);
+  color: rgba(245,236,215,0.6);
+  padding: 3rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand { }
+
+.footer-brand img {
+  height: 60px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(126,217,87,0.3));
+}
+
+.footer-brand h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--terra);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-neon);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.5rem; }
+.footer-col a {
+  color: rgba(245,236,215,0.6);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--verde-neon); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-bottom a { color: var(--verde-neon); text-decoration: none; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── DIVIDER ─── */
+.wave-divider {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+}
+
+
+/* ─── DESTAQUE CARDS UPDATED ─── */
+.destaque-link { text-decoration: none; display: block; color: inherit; }
+.destaque-thumb { position: relative; height: 220px; overflow: hidden; }
+.destaque-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.destaque-card:hover .destaque-thumb img { transform: scale(1.06); }
+.play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.25);
+  transition: background 0.3s;
+}
+.destaque-card:hover .play-overlay { background: rgba(0,0,0,0.45); }
+.play-btn {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+}
+.play-btn svg { fill: white; margin-left: 4px; }
+.destaque-card:hover .play-btn { background: var(--verde-neon); border-color: var(--verde-neon); transform: scale(1.1); }
+.destaque-card:hover .play-btn svg { fill: var(--escuro); }
+.play-btn.no-play { cursor: default; }
+.destaque-featured { border-color: rgba(244,200,66,0.5) !important; }
+.destaque-featured:hover { border-color: var(--amarelo) !important; }
+.destaque-featured-badge {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  background: var(--amarelo); color: var(--escuro);
+  font-size: 0.65rem; font-weight: 800;
+  padding: 0.25rem 0.6rem; border-radius: 100px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+}
+.destaque-mais {
+  border-style: dashed !important;
+  cursor: default;
+}
+.btn-insta-mini {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: white; text-decoration: none;
+  padding: 0.6rem 1.4rem; border-radius: 100px;
+  font-weight: 800; font-size: 0.82rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+.btn-insta-mini:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+
+/* ─── COMO FUNCIONA ─── */
+#como-funciona { background: linear-gradient(180deg, var(--creme) 0%, white 100%); }
+
+.como-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.como-bloco {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.como-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--verde-neon);
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.6;
+  min-width: 3rem;
+}
+
+.como-bloco h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--verde-escuro);
+  margin-bottom: 0.5rem;
+}
+
+.como-bloco p { font-size: 0.88rem; color: var(--cinza); line-height: 1.7; }
+.como-bloco p strong { color: var(--verde-escuro); }
+
+.diagram-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 40px rgba(30,107,60,0.1);
+  border: 1px solid rgba(30,107,60,0.1);
+  position: sticky;
+  top: 80px;
+}
+
+.diagram-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--verde);
+}
+
+.diagram-caption {
+  font-size: 0.72rem;
+  color: var(--cinza);
+  text-align: center;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+.estudo-resultados {
+  background: var(--verde-escuro);
+  border-radius: 24px;
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.resultados-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.resultado-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(126,217,87,0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.resultado-card:hover { border-color: var(--verde-neon); transform: translateY(-3px); }
+.resultado-icon { font-size: 1.8rem; display: block; margin-bottom: 0.75rem; }
+
+.resultado-card h4 {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--terra);
+  margin-bottom: 0.5rem;
+}
+
+.resultado-card p { font-size: 0.82rem; color: rgba(245,236,215,0.7); line-height: 1.65; }
+.resultado-card p strong { color: var(--verde-neon); }
+.resultado-card p em { color: rgba(245,236,215,0.85); font-style: italic; }
+
+.saibamais-box {
+  background: white;
+  border: 2px solid var(--verde-claro);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  box-shadow: 0 4px 20px rgba(30,107,60,0.08);
+}
+
+.saibamais-icon { font-size: 2.5rem; flex-shrink: 0; }
+
+.saibamais-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde);
+  margin-bottom: 0.5rem;
+}
+
+.saibamais-ref { font-size: 0.88rem; color: var(--cinza); line-height: 1.7; margin-bottom: 1rem; }
+.saibamais-ref em { font-style: italic; color: var(--verde-escuro); }
+
+.saibamais-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-artigo {
+  background: var(--verde);
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-artigo:hover { background: var(--verde-escuro); transform: translateY(-2px); }
+
+.btn-doi {
+  background: transparent;
+  color: var(--verde);
+  padding: 0.6rem 1.25rem;
+  border: 2px solid var(--verde);
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+}
+.btn-doi:hover { background: var(--verde); color: white; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-visual { order: -1; }
+  .mascot-wrapper { width: 200px; height: 200px; }
+  .hero-stats { justify-content: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-sub { margin: 0 auto 2rem; }
+  .sobre-grid { grid-template-columns: 1fr; }
+  .destaques-grid { grid-template-columns: 1fr; }
+  .equipe-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; }
+  .conquistas-grid { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+  .insta-preview { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="img/image-2.png" alt="Caçambinho">
+    <span>Clube da Caçamba
+      <small>UEL · Análise do Comportamento</small>
+    </span>
+  </a>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#destaques">Entrevistas</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li><li><a href="#publicacoes">Publicações</a></li>
+    <li><a href="#conquistas">Conquistas</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="https://www.instagram.com/clubedacacamba.uel/" target="_blank" class="nav-insta">Instagram ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge">Pesquisa &amp; Extensão · UEL · Londrina, PR</div>
+      <h1>Comportamento<br>que <em>transforma</em><br>o planeta.</h1>
+      <p class="hero-sub">O Clube da Caçamba aplica os princípios da <strong>Análise do Comportamento</strong> para promover práticas pró-ambientais, produzir conhecimento científico e conectar a universidade com a comunidade.</p>
+      <div class="hero-ctas">
+        <a href="#publicacoes" class="btn-primary">Ver Publicações</a>
+        <a href="#sobre" class="btn-outline">Conhecer o Clube</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="mascot-wrapper">
+        <div class="mascot-glow"></div>
+        <img src="img/image-2.png" alt="Caçambinho – mascote do Clube da Caçamba">
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>5+</strong>
+          <span>Anos de projeto</span>
+        </div>
+        <div class="hero-stat">
+          <strong>20+</strong>
+          <span>Publicações</span>
+        </div>
+        <div class="hero-stat">
+          <strong>ODS</strong>
+          <span>11 e 12 da ONU</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="sobre-grid">
+      <div>
+        <p class="section-label">Quem somos</p>
+        <h2>Ciência comportamental a serviço do meio ambiente</h2>
+        <div class="sobre-texto">
+          <p>O <strong>Clube da Caçamba</strong> é um projeto de pesquisa e extensão da <strong>Universidade Estadual de Londrina (UEL)</strong>, fundado e coordenado pela <strong>Profa. Dra. Verônica Bender Haydu</strong>, do Departamento de Psicologia Geral e Análise do Comportamento.</p>
+          <p>Nosso trabalho envolve a produção e difusão de conteúdo de <strong>educação ambiental</strong> em mídias sociais — Instagram e Facebook — utilizando ferramentas da <strong>tecnologia comportamental</strong>, alcançando a comunidade local e internacional.</p>
+          <p>O interesse específico por caçambas nasce do problema ambiental gerado pelo <strong>descarte incorreto de resíduos sólidos</strong> da construção civil: quando separados corretamente, a maior parte desses resíduos pode ser reciclada.</p>
+          <p>O projeto integra estudantes de graduação e pós-graduação, promovendo <strong>metacontingências</strong> voltadas para os Objetivos de Desenvolvimento Sustentável da Agenda 2030 da ONU.</p>
+        </div>
+
+        <div class="coord-card reveal">
+          <div class="coord-card-header">
+            <div class="coord-avatar">🎓</div>
+            <div class="coord-info">
+              <h4>Profa. Dra. Verônica Bender Haydu</h4>
+              <p>Coordenadora · Depto. de Psicologia Geral e Análise do Comportamento – UEL<br>
+              Membro do Think Tank sobre Cultura e Análise do Comportamento · Sócia emérita da ABPMC</p>
+            </div>
+          </div>
+          <p style="font-size:0.82rem; color: var(--cinza); line-height:1.6;">Graduada em Psicologia pela UEL (primeira turma, 1972). Mestre e doutora pela USP. Pós-doutoral na UFSCar. Lidera o Laboratório de Análises e Tecnologias Comportamentais e o Grupo de Pesquisa CNPq "Análise do Comportamento: Implicações Clínicas e Educacionais".</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-label">Objetivos de Desenvolvimento Sustentável</p>
+        <h2 style="font-size:1.6rem;">Alinhados à Agenda 2030 da ONU</h2>
+        <br>
+        <div class="ods-grid reveal">
+          <div class="ods-card" data-num="11">
+            <h5>ODS 11</h5>
+            <p>Cidades e Comunidades Sustentáveis — tornar os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.</p>
+          </div>
+          <div class="ods-card" data-num="12">
+            <h5>ODS 12</h5>
+            <p>Consumo e Produção Responsáveis — assegurar padrões sustentáveis de produção e de consumo.</p>
+          </div>
+          <div class="ods-card" data-num="13">
+            <h5>ODS 13</h5>
+            <p>Ação Climática — medidas urgentes para combater as mudanças climáticas e seus impactos.</p>
+          </div>
+          <div class="ods-card" data-num="4">
+            <h5>ODS 4</h5>
+            <p>Educação de Qualidade — divulgação de conhecimento científico para a comunidade via mídias sociais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUES / ENTREVISTAS -->
+<section id="destaques">
+  <div class="section-inner">
+    <p class="section-label">Painel de Destaques</p>
+    <h2>Entrevistas &amp; Eventos</h2>
+    <p style="color: rgba(245,236,215,0.65); max-width:560px; line-height:1.7; font-size:0.95rem;">O Clube da Caçamba promove conversas com referências nacionais e internacionais da Análise do Comportamento e do comportamento pró-ambiental.</p>
+
+    <div class="destaques-grid">
+
+      <div class="destaque-card reveal">
+        <a href="https://www.instagram.com/reel/DYiuztLMuqb/" target="_blank" class="destaque-link">
+          <div class="destaque-thumb">
+            <img src="img/image-3.jpg" alt="Entrevista PhD. Colin Harte">
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="destaque-body">
+            <p class="destaque-tag">🎙️ Entrevista · UFSCAR</p>
+            <h3>PhD. Colin Harte</h3>
+            <p>Conversa com o pesquisador da UFSCar sobre Análise do Comportamento e sustentabilidade ambiental. Assista no Instagram ↗</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="destaque-card reveal">
+        <a href="https://www.instagram.com/reel/DYZ0eRvNGjm/" target="_blank" class="destaque-link">
+          <div class="destaque-thumb">
+            <img src="img/image-4.jpg" alt="Entrevista Prof. Dr. Alexandre Dittrich">
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="destaque-body">
+            <p class="destaque-tag">🎙️ Entrevista · UFPR</p>
+            <h3>Prof. Dr. Alexandre Dittrich</h3>
+            <p>Entrevista com o professor da UFPR sobre comportamento e questões ambientais. Assista no Instagram ↗</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="destaque-card reveal">
+        <div class="destaque-thumb no-link">
+          <img src="img/image-5.jpg" alt="Entrevista Profa. Dra. Carolina Laurenti">
+          <div class="play-overlay">
+            <div class="play-btn no-play">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="destaque-body">
+          <p class="destaque-tag">🎙️ Entrevista · UEM</p>
+          <h3>Profa. Dra. Carolina Laurenti</h3>
+          <p>Conversa com a pesquisadora da UEM sobre fundamentos filosóficos da Análise do Comportamento e sua relação com o meio ambiente.</p>
+        </div>
+      </div>
+
+      <div class="destaque-card reveal">
+        <div class="destaque-thumb no-link">
+          <img src="img/image-6.jpg" alt="Entrevista Prof. Julio Kanamota">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="destaque-body">
+          <p class="destaque-tag">🎙️ Entrevista</p>
+          <h3>Prof. Julio Kanamota</h3>
+          <p>Como a Análise do Comportamento contribui para a preservação ambiental? Uma conversa sobre comportamentos pró-ambientais e sustentabilidade.</p>
+        </div>
+      </div>
+
+      <div class="destaque-card reveal destaque-featured">
+        <div class="destaque-thumb no-link">
+          <img src="img/image-7.jpg" alt="Entrevista PhD. Steven C. Hayes">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <span class="destaque-featured-badge">⭐ Destaque Internacional</span>
+        </div>
+        <div class="destaque-body">
+          <p class="destaque-tag">🌎 Entrevista Internacional · USA</p>
+          <h3>PhD. Steven C. Hayes</h3>
+          <p>B.F. Skinner, Análise do Comportamento e Problemas Ambientais. Conversa com o criador da ACT sobre flexibilidade psicológica e sustentabilidade.</p>
+        </div>
+      </div>
+
+      <div class="destaque-card reveal destaque-mais">
+        <div class="destaque-body" style="padding: 2.5rem; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; height:100%;">
+          <div style="font-size:3.5rem; margin-bottom:1rem;">📲</div>
+          <p class="destaque-tag" style="justify-content:center;">Mais entrevistas</p>
+          <h3 style="font-size:1.1rem;">Veja todas no Instagram</h3>
+          <p style="margin-bottom:1.5rem;">Novas entrevistas e conteúdos de educação ambiental toda semana no nosso perfil.</p>
+          <a href="https://www.instagram.com/clubedacacamba.uel/" target="_blank" class="btn-insta-mini">@clubedacacamba.uel ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="section-inner">
+    <p class="section-label">Ciência em Ação</p>
+    <h2>Como o Clube muda comportamentos</h2>
+    <p style="color:var(--cinza); max-width:720px; line-height:1.8; font-size:1rem; margin-bottom:3rem;">
+      O Clube da Caçamba não é apenas uma página de divulgação — é um <strong>experimento científico vivo</strong>.
+      Um estudo publicado na revista <em>Behavior and Social Issues</em> (Springer, 2025) demonstrou como
+      o projeto funciona como uma <strong>metacontingência</strong>, modificando efetivamente comportamentos
+      pró-ambientais de seus seguidores através das redes sociais.
+    </p>
+
+    <div class="como-grid">
+      <div class="como-texto reveal">
+        <div class="como-bloco">
+          <span class="como-num">01</span>
+          <div>
+            <h3>Contingências Comportamentais Entrelaçadas (CBEs)</h3>
+            <p>Estudantes de graduação e pós-graduação criam e revisam conteúdos educativos. Supervisores
+            revisam, corrigem e aprovam cada publicação. Participantes monitoram a página, organizam a
+            agenda e produzem materiais científicos. Esse conjunto de comportamentos interligados forma
+            as <strong>CBEs</strong> — a engrenagem interna do Clube.</p>
+          </div>
+        </div>
+        <div class="como-bloco">
+          <span class="como-num">02</span>
+          <div>
+            <h3>Produto Agregado</h3>
+            <p>O resultado das CBEs são os <strong>posts publicados</strong> no Instagram e Facebook —
+            além de guias, artigos e capítulos de livros. Cada publicação traz instruções verbais
+            fundamentadas na ciência do comportamento: regras que funcionam como antecedentes para
+            comportamentos pró-ambientais fora da internet.</p>
+          </div>
+        </div>
+        <div class="como-bloco">
+          <span class="como-num">03</span>
+          <div>
+            <h3>Ambiente Selecionador</h3>
+            <p>Os <strong>seguidores</strong> do Clube — e a comunidade da Análise do Comportamento —
+            formam o ambiente que seleciona o que funciona. Curtidas, comentários e novos seguidores
+            são as <strong>consequências culturais</strong> que retroalimentam o sistema, orientando
+            o tipo de conteúdo a ser produzido.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="como-diagram reveal">
+        <div class="diagram-card">
+          <p class="diagram-label">Metacontingência do Clube da Caçamba – UEL</p>
+          <img src="img/image-8.jpg"
+               alt="Diagrama de metacontingência: contingências comportamentais entrelaçadas entre supervisores e participantes geram posts como produto agregado, modificando o comportamento dos seguidores"
+               style="width:100%; border-radius:12px; margin-top:1rem;">
+          <p class="diagram-caption">Fonte: Haydu et al. (2024) apud Celli et al. (2025).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="estudo-resultados reveal">
+      <h3 style="font-family:'Playfair Display', serif; font-size:1.5rem; color:var(--terra); margin-bottom:1.5rem;">
+        O que o estudo encontrou?
+      </h3>
+      <div class="resultados-grid">
+        <div class="resultado-card">
+          <span class="resultado-icon">📈</span>
+          <h4>Aumento de respostas pró-ambientais</h4>
+          <p>Em todos os meses analisados, os formulários <em>pós-publicação</em> apresentaram maior
+          porcentagem de respostas pró-ambientais em comparação aos formulários <em>pré-publicação</em>,
+          indicando mudança no comportamento verbal dos seguidores (N = 73 participantes, 6 meses de coleta).</p>
+        </div>
+        <div class="resultado-card">
+          <span class="resultado-icon">♻️</span>
+          <h4>Descarte correto: maior impacto</h4>
+          <p>Posts sobre <strong>descarte de materiais</strong> (esmalte, chiclete, lâmpadas) produziram
+          aumento médio de <strong>20%</strong> nas respostas pró-ambientais. Todos os entrevistados
+          relataram ter descoberto novos pontos de coleta graças ao conteúdo do Clube.</p>
+        </div>
+        <div class="resultado-card">
+          <span class="resultado-icon">🔄</span>
+          <h4>Reforçador de comportamentos existentes</h4>
+          <p>Para seguidores que já possuíam comportamentos sustentáveis, os posts <strong>validaram
+          e reforçaram</strong> práticas já existentes. Uma participante relatou: <em>"Os posts encorajam
+          você a aumentar seu comportamento ou acabam validando um comportamento que você já tem."</em></p>
+        </div>
+        <div class="resultado-card">
+          <span class="resultado-icon">🌐</span>
+          <h4>Tecnologia comportamental cultural</h4>
+          <p>O estudo conclui que o Clube constitui uma <strong>metacontingência</strong> e um modelo
+          de intervenção comportamental em nível cultural — conectando academia e comunidade através do
+          ecossistema digital, estando agora em sua terceira geração de estudantes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="saibamais-box reveal">
+      <div class="saibamais-icon">📄</div>
+      <div class="saibamais-content">
+        <p class="saibamais-label">Para saber mais</p>
+        <p class="saibamais-ref">
+          Celli, L., Villa, C. P., Ogata, M. Y., Neves Filho, H. B., Melo, C. M., Freitas, M. C.,
+          &amp; Haydu, V. B. (2025). Pro-environmental behavioral changes through science communication
+          in the digital and social media ecosystem: The effects of Clube da Caçamba—UEL project.
+          <em>Behavior and Social Issues, 34</em>, 625–641.
+        </p>
+        <div class="saibamais-btns">
+          <a href="https://link.springer.com/article/10.1007/s42822-025-00215-7" target="_blank" class="btn-artigo">
+            🔗 Acessar artigo (Springer)
+          </a>
+          <a href="https://doi.org/10.1007/s42822-025-00215-7" target="_blank" class="btn-doi">
+            DOI: 10.1007/s42822-025-00215-7 ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICAÇÕES -->
+<section id="publicacoes">
+  <div class="section-inner">
+    <p class="section-label">Produção Científica</p>
+    <h2>Publicações &amp; Participações em Congressos</h2>
+
+    <div class="pub-list">
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Pro-environmental Behavioral Changes Through Science Communication in the Digital and Social Media Ecosystem: The Effects of Clube da Caçamba—UEL Project</div>
+          <div class="pub-authors">Celli, L.; Villa, C. P.; Ogata, M. Y.; Neves Filho, H. B.; Melo, C. M.; Freitas, M. C.; Haydu, V. B.</div>
+          <div class="pub-venue">Behavior and Social Issues · Springer Nature</div>
+        </div>
+        <span class="pub-badge">Periódico</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Melhor Painel — ABPMC (Associação Brasileira de Psicologia e Medicina do Comportamento)</div>
+          <div class="pub-authors">Discente do Clube da Caçamba – UEL</div>
+          <div class="pub-venue">Congresso Nacional da ABPMC · 2025</div>
+        </div>
+        <span class="pub-badge award">🏆 Prêmio</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Clube da Caçamba - UEL: Ampliando a Disseminação do Conhecimento Científico sobre Comportamentos Pró-Ambientais em Mídias Sociais e Ações Interativas</div>
+          <div class="pub-authors">Doi, I. F. M.; Haydu, V. B.; Costa Júnior, E. M.; Medeiros, K. M. M.</div>
+          <div class="pub-venue">Congresso ABPMC · Out/2024</div>
+        </div>
+        <span class="pub-badge">Congresso</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Metacontingências de Ações Extensionistas voltadas para a Agenda 2023 da ONU: o Projeto Clube da Caçamba - UEL e a Divulgação de Conhecimento Científico</div>
+          <div class="pub-authors">Haydu, V. B. et al.</div>
+          <div class="pub-venue">Seminários de Estudos Interdisciplinares I · 2024</div>
+        </div>
+        <span class="pub-badge">Seminário</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Clube da Caçamba - UEL: Disseminação de Conhecimento Científico voltado ao Desenvolvimento Sustentável e à Inclusão Social</div>
+          <div class="pub-authors">Haydu, V. B. et al.</div>
+          <div class="pub-venue">VII Congresso Amazônico de Educação à Distância · 2024</div>
+        </div>
+        <span class="pub-badge">Congresso</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Clube da Caçamba - UEL: Promovendo Contingências Comportamentais Entrelaçadas e a Divulgação por Mídias Sociais de Conteúdos Relevantes para a Educação Ambiental</div>
+          <div class="pub-authors">Haydu, V. B. et al.</div>
+          <div class="pub-venue">VII Congresso de Psicologia e Análise do Comportamento e VIII Jornada de Análise do Comportamento da UEL</div>
+        </div>
+        <span class="pub-badge">Congresso</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Inserção Social de Estudantes Universitários na Promoção da Educação Ambiental: Uma Contribuição ao Desenvolvimento Sustentável</div>
+          <div class="pub-authors">Haydu, V. B. et al.</div>
+          <div class="pub-venue">Revista de Gestão e Secretariado · Jun/2024</div>
+        </div>
+        <span class="pub-badge">Periódico</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Educação Ambiental e o Projeto 3S: Sensibilização e Separação Seletiva em Condomínios Residenciais de Londrina</div>
+          <div class="pub-authors">Haydu, V. B. et al.</div>
+          <div class="pub-venue">IV Seminário Interdisciplinar de Pesquisas em Resíduos · 2024</div>
+        </div>
+        <span class="pub-badge">Seminário</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2022</span>
+        <div>
+          <div class="pub-title">Tecnologias Comportamentais para a Promoção de Comportamentos Pró-Ambientais: Projeto Clube da Caçamba - UEL</div>
+          <div class="pub-authors">Haydu, V. B.; Maia, N. N.; Santana, G. S. G.; Celli, L.; Barros, M. E. F.; Macedo, R. P.; Guimarães, R. A.; Castro, T. C.; Melo, C. M.</div>
+          <div class="pub-venue">Revista Brasileira de Análise do Comportamento</div>
+        </div>
+        <span class="pub-badge">Periódico</span>
+      </div>
+
+      <div class="pub-item reveal">
+        <span class="pub-year">2021</span>
+        <div>
+          <div class="pub-title">A Reciclagem dos Resíduos Sólidos da Construção Civil: Um Guia Simplificado</div>
+          <div class="pub-authors">Maia, N. N.; Balan, R. N.; Cianca, B. C.; Pereira, M. P.; Haydu, V. B.</div>
+          <div class="pub-venue">Publicação UEL · Material Instrucional</div>
+        </div>
+        <span class="pub-badge">Material</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONQUISTAS -->
+<section id="conquistas">
+  <div class="section-inner">
+    <p class="section-label">Conquistas</p>
+    <h2>Prêmios &amp; Reconhecimentos</h2>
+
+    <div class="conquistas-grid">
+      <div class="conquista-card reveal">
+        <div class="conquista-icon">🥇</div>
+        <h3>Melhor Painel — ABPMC 2025</h3>
+        <p>Uma discente do Clube da Caçamba foi vencedora do Prêmio de Melhor Painel na Associação Brasileira de Psicologia e Medicina do Comportamento, destacando a pesquisa do grupo em nível nacional.</p>
+        <span class="conquista-year">2025 · ABPMC</span>
+      </div>
+
+      <div class="conquista-card reveal">
+        <div class="conquista-icon">📰</div>
+        <h3>Publicação em Periódico Internacional</h3>
+        <p>Artigo publicado na revista <em>Behavior and Social Issues</em> (Springer Nature) sobre os efeitos das publicações do Clube no comportamento pró-ambiental de seguidores das redes sociais.</p>
+        <span class="conquista-year">2025 · Springer Nature</span>
+      </div>
+
+      <div class="conquista-card reveal">
+        <div class="conquista-icon">🌐</div>
+        <h3>Entrevista com PhD. Steven C. Hayes</h3>
+        <p>O Clube da Caçamba conduziu entrevista com o Prof. Steven C. Hayes, criador da Terapia de Aceitação e Compromisso (ACT), explorando conexões entre flexibilidade psicológica e sustentabilidade.</p>
+        <span class="conquista-year">Destaque Internacional</span>
+      </div>
+
+      <div class="conquista-card reveal">
+        <div class="conquista-icon">🎓</div>
+        <h3>Acreditação e Reconhecimento Acadêmico</h3>
+        <p>A coordenadora Profa. Dra. Verônica Bender Haydu é sócia emérita da ABPMC, membro do Think Tank sobre Cultura e Análise do Comportamento, e lidera grupo de pesquisa cadastrado no CNPq.</p>
+        <span class="conquista-year">ABPMC · CNPq</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <div class="section-inner">
+    <div class="equipe-header">
+      <div>
+        <p class="section-label">Membros</p>
+        <h2>Equipe do Clube</h2>
+      </div>
+      <p style="color:var(--cinza); font-size:0.85rem; max-width:300px; text-align:right;">Docentes, graduandos e pós-graduandos da UEL trabalhando juntos pela educação ambiental.</p>
+    </div>
+
+    <div class="equipe-grid">
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, var(--verde-escuro), var(--azul));">VH</div>
+        <h4>Profa. Dra. Verônica Bender Haydu</h4>
+        <span>Departamento de Psicologia Geral e Análise do Comportamento</span>
+        <span class="membro-role">Coordenadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #1B5E20, #388E3C);">LC</div>
+        <h4>Lívia Celli</h4>
+        <span>Pesquisadora e autora de publicações científicas do Clube</span>
+        <span class="membro-role">Pesquisadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #004D40, #00796B);">CP</div>
+        <h4>Caroline Prestes Villa</h4>
+        <span>Co-supervisão de projetos e produção científica</span>
+        <span class="membro-role">Pesquisadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #0D47A1, #1565C0);">NN</div>
+        <h4>Natália N. Maia</h4>
+        <span>Fundação do projeto e produção de materiais instrucionais</span>
+        <span class="membro-role">Ex-membro fundadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #4A148C, #6A1B9A);">ID</div>
+        <h4>Isadora F. M. Doi</h4>
+        <span>Ampliação da disseminação científica em mídias sociais</span>
+        <span class="membro-role">Discente · Pesquisadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #BF360C, #E64A19);">MO</div>
+        <h4>Mayara Y. Ogata</h4>
+        <span>Contribuições à análise e discussão de publicações científicas</span>
+        <span class="membro-role">Pesquisadora</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #1A5276, #2471A3);">HN</div>
+        <h4>Hernando Borges Neves Filho</h4>
+        <span>Introdução e processo editorial de publicações do grupo</span>
+        <span class="membro-role">Pesquisador</span>
+      </div>
+
+      <div class="membro-card reveal">
+        <div class="membro-avatar" style="background: linear-gradient(135deg, #784212, #935116);">CM</div>
+        <h4>Camila Muchon de Melo</h4>
+        <span>Colaboradora externa – UFSCar – em publicações do grupo</span>
+        <span class="membro-role">Colaboradora</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram">
+  <p class="section-label">Redes Sociais</p>
+  <h2 style="color:var(--terra);">Siga o Clube da Caçamba</h2>
+  <p style="color:rgba(245,236,215,0.65); margin-top:0.5rem; font-size:0.95rem;">Conteúdo de educação ambiental, ciência comportamental e sustentabilidade toda semana.</p>
+
+  <div class="insta-preview">
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#1E6B3C,#2E8B57);">♻️</div></div>
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#1A5276,#2471A3);">🌊</div></div>
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#4A235A,#6C3483);">🧬</div></div>
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#0E6655,#148F77);">🌱</div></div>
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#784212,#A04000);">🏗️</div></div>
+    <div class="insta-tile"><div class="insta-tile-inner" style="background: linear-gradient(135deg,#1C2833,#2C3E50);">🌍</div></div>
+  </div>
+
+  <a href="https://www.instagram.com/clubedacacamba.uel/" target="_blank" class="insta-link">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    @clubedacacamba.uel
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/image-9.png
